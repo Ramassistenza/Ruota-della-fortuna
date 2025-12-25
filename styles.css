@@ -1,0 +1,482 @@
+/* ======================================================
+   RESET & BASE
+====================================================== */
+*{ box-sizing:border-box; }
+
+html,body{
+  height:100%;
+  margin:0;
+  font-family:-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+}
+
+body{
+  background: radial-gradient(circle at top, #2a0b3d, #000);
+  color:#fff;
+  overflow:hidden;
+}
+
+.app{
+  height:100%;
+  display:flex;
+  flex-direction:column;
+  padding:16px;
+  gap:18px;
+}
+
+/* ======================================================
+   GIOCATORI – TV STYLE AVANZATO
+====================================================== */
+.players{
+  display:flex;
+  gap:18px;
+}
+
+.player{
+  flex:1;
+  border-radius:24px;
+  padding:18px;
+  position:relative;
+  box-shadow:0 12px 32px rgba(0,0,0,.6);
+}
+
+/* colori per giocatore */
+.player[data-player="0"]{ background:#0a3cff; }
+.player[data-player="1"]{ background:#c2185b; }
+.player[data-player="2"]{ background:#2e7d32; }
+
+.player.active{
+  box-shadow:
+    0 0 0 4px #fff,
+    0 0 35px rgba(255,255,255,.7);
+}
+
+/* riquadro nome */
+.player-name{
+  background:rgba(0,0,0,.35);
+  padding:10px 14px;
+  border-radius:14px;
+  font-size:22px;
+  font-weight:900;
+  text-align:center;
+  margin-bottom:12px;
+}
+
+/* importi TV */
+.player-round,
+.player-total{
+  font-size:32px;
+  font-weight:900;
+  color:#fff;
+  text-align:center;
+  margin:6px 0;
+  letter-spacing:.5px;
+}
+
+/* nasconde bancarotta */
+.bankrupt-btn{ display:none; }
+
+/* ======================================================
+   TABELLONE – STILE TV FEDELE (RESPONSIVE CORRETTO)
+====================================================== */
+
+.app{
+  min-height:0;
+}
+
+/* contenitore centrale */
+.board-container{
+  flex:1;
+  min-height:0;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:16px;
+  overflow:hidden;
+}
+
+.board-wrapper{
+  width:100%;
+  max-width:1400px;          /* ⬅️ CONTROLLI TUTTO QUI */
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+
+
+
+/* TABELLONE */
+.board{
+  width:100%;                /* 🔥 CHIAVE */
+  background: radial-gradient(circle at top,#7a1fa2,#3b0b55);
+  padding:clamp(24px, 3vw, 40px);
+  border-radius:36px;
+
+  box-shadow:
+    0 0 0 6px #f2c8ff,
+    0 0 55px rgba(255,0,255,.65);
+
+  display:flex;
+  flex-direction:column;
+  gap:clamp(10px, 1.5vw, 14px);
+}
+
+
+/* righe */
+.board-row{
+  display:flex;
+  justify-content:center;
+  gap:clamp(6px, 1vw, 12px);
+  flex-wrap:nowrap;
+}
+
+/* ======================================================
+   CASELLE – RESPONSIVE TV STYLE
+====================================================== */
+
+.cell{
+  width:clamp(56px, 5.2vw, 72px);
+  height:clamp(78px, 7vw, 92px);
+
+  border-radius:14px;
+
+  background: rgba(255,255,255,.14);
+  border:3px solid rgba(255,255,255,.22);
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+
+  font-size:clamp(34px, 4vw, 48px);
+  font-weight:900;
+  color:#fff;
+
+  transition:
+    background .25s ease,
+    box-shadow .25s ease,
+    transform .25s ease;
+}
+
+/* nascosta */
+.cell.hidden{
+  color:transparent;
+}
+
+/* rivelata */
+.cell.revealed{
+  background:linear-gradient(#ffffff,#ededed);
+  color:#4a005f;
+  border-color:#fff;
+}
+
+/* spazio */
+.cell.space{
+  width:clamp(24px, 2vw, 32px);
+  background:transparent;
+  border:none;
+  box-shadow:none;
+}
+
+
+
+/* ================= TEMA ================= */
+.theme-box{
+  width:100%;                /* 🔥 ORA È IDENTICO */
+  background: linear-gradient(180deg,#2b063e,#15001f);
+  border-radius:26px;
+  padding:16px 24px;
+
+  box-shadow:
+    0 0 0 4px rgba(242,200,255,.6),
+    0 0 25px rgba(180,0,255,.35);
+}
+
+.theme{
+  text-align:center;
+  font-size:24px;
+  font-weight:900;
+  letter-spacing:1px;
+}
+
+
+/* ======================================================
+   AZIONI
+====================================================== */
+.actions{
+  display:flex;
+  justify-content:center;
+  gap:14px;
+  padding-bottom:8px;
+}
+
+.btn{
+  padding:14px 22px;
+  border-radius:16px;
+  border:2px solid rgba(255,255,255,.3);
+  background:rgba(0,0,0,.55);
+  color:#fff;
+  font-weight:900;
+  cursor:pointer;
+}
+
+.btn:hover{
+  filter:brightness(1.15);
+}
+
+.btn-primary{
+  background:linear-gradient(180deg,#2b7cff,#144caa);
+  border-color:#fff;
+}
+
+/* ======================================================
+   MODALI (NON OSCURA + POSIZIONE ALTA)
+====================================================== */
+.modal{
+  position:fixed;
+  inset:0;
+
+  /* ❌ niente oscuramento */
+  background:transparent;
+
+  display:flex;
+
+  /* ⬆️ posizionato in alto */
+  justify-content:center;
+  align-items:flex-start;
+
+  padding-top:40px; /* distanza dall’alto */
+
+  z-index:100;
+  pointer-events:auto;
+}
+
+.modal.hidden{ 
+  display:none; 
+}
+
+.modal-box{
+  background:rgba(17,17,17,.95);
+  border:4px solid #2b7cff;
+  border-radius:22px;
+  padding:24px;
+  box-shadow:0 20px 60px rgba(0,0,0,.6);
+
+  min-width:380px;
+  max-width:90%;
+
+  /* animazione elegante */
+  animation: modalSlideDown .25s ease;
+}
+
+@keyframes modalSlideDown{
+  from{
+    transform:translateY(-20px);
+    opacity:0;
+  }
+  to{
+    transform:translateY(0);
+    opacity:1;
+  }
+}
+
+.modal-box h2{
+  margin:0 0 12px;
+  font-size:22px;
+  font-weight:900;
+}
+
+.modal-box input{
+  width:100%;
+  padding:14px;
+  border-radius:14px;
+  border:2px solid rgba(255,255,255,.25);
+  background:rgba(0,0,0,.4);
+  color:#fff;
+  font-weight:800;
+}
+
+.modal-actions{
+  margin-top:14px;
+  display:flex;
+  justify-content:flex-end;
+  gap:12px;
+}
+
+
+/* ======================================================
+   RUOTA
+====================================================== */
+.wheel-box{
+  width:640px;
+  height:700px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:16px;
+}
+
+.wheel-wrapper{
+  position:relative;
+  width:520px;
+  height:520px;
+}
+
+#wheelCanvas{
+  width:520px;
+  height:520px;
+}
+
+/* puntatore */
+.wheel-pointer{
+  position:absolute;
+  top:-26px;
+  left:50%;
+  transform:translateX(-50%) rotate(180deg);
+  width:0;
+  height:0;
+  border-left:18px solid transparent;
+  border-right:18px solid transparent;
+  border-bottom:30px solid #fff;
+  z-index:10;
+}
+
+/* mozzo */
+.wheel-center{
+  position:absolute;
+  width:60px;
+  height:60px;
+  background:radial-gradient(circle,#eee,#777);
+  border-radius:50%;
+  border:4px solid #fff;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+}
+
+/* ======================================================
+   ANTEPRIMA RUOTA
+====================================================== */
+.wheel-preview{
+  position:fixed;
+  right:14px;
+  bottom:120px;
+  padding:10px 14px;
+  border-radius:14px;
+  border:2px solid #2b7cff;
+  background:rgba(17,17,17,.92);
+  font-weight:900;
+  cursor:pointer;
+  z-index:2000;
+}
+
+/* ======================================================
+   TOAST
+====================================================== */
+.toast{
+  position:fixed;
+  bottom:24px;
+  left:50%;
+  transform:translateX(-50%);
+  padding:10px 16px;
+  border-radius:16px;
+  background:#111;
+  border:2px solid #2b7cff;
+  font-weight:900;
+  z-index:1200;
+}
+.toast.hide{ opacity:0; }
+
+/* ======================================================
+   LETTERA SBARRATA
+====================================================== */
+.wrong-letter{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  background:#fff;
+  color:#000;
+  font-size:52px;
+  font-weight:900;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1300;
+}
+
+.wrong-letter::after{
+  content:"";
+  position:absolute;
+  width:140%;
+  height:7px;
+  background:red;
+  transform:rotate(-45deg);
+}
+
+.cell.flash{
+  animation: flashBlue .5s ease forwards;
+}
+
+.cell.reveal{
+  animation: revealLetter .6s ease forwards;
+}
+
+/* ======================================================
+   ANIMAZIONI LETTERE – TV STYLE
+====================================================== */
+
+@keyframes flashBlue{
+  0%{
+    background:#1e3cff;
+    box-shadow:0 0 0 rgba(0,0,0,0);
+  }
+  50%{
+    background:#4d7cff;
+    box-shadow:0 0 24px rgba(43,124,255,.9);
+  }
+  100%{
+    background:#1e3cff;
+    box-shadow:0 0 12px rgba(43,124,255,.6);
+  }
+}
+
+@keyframes revealLetter{
+  0%{
+    background:#1e3cff;
+    color:transparent;
+    transform:scale(1);
+  }
+  60%{
+    transform:scale(1.15);
+  }
+  100%{
+    background:linear-gradient(#ffffff,#ededed);
+    color:#4a005f;
+    transform:scale(1);
+  }
+}
+
+.final-countdown{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%,-50%);
+  font-size:96px;
+  font-weight:900;
+  color:#ff3b3b;
+  text-shadow:0 0 25px rgba(255,0,0,.8);
+  z-index:3000;
+  pointer-events:none;
+}
+
+.final-countdown.hidden{
+  display:none;
+}
+
+
+
