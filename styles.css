@@ -485,10 +485,14 @@ body{
   right: 0;
   background: #111;
   padding: 10px;
-  display: grid;
+  display: none; /* ⛔ nascosta */
   grid-template-columns: repeat(7, 1fr);
   gap: 6px;
   z-index: 3000;
+}
+
+.mobile-keyboard.visible{
+  display: grid; /* ✅ visibile */
 }
 
 .mobile-keyboard button{
