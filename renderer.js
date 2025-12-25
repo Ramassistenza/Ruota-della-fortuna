@@ -854,6 +854,32 @@ function checkLetter(letterRaw){
 
       return { found };
     }
+    
+    /* ======================================================
+   TASTIERA MOBILE (iPhone / iPad)
+====================================================== */
+const mobileKeyboard = document.getElementById("mobileKeyboard");
+
+if (mobileKeyboard) {
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  mobileKeyboard.innerHTML = "";
+
+  letters.forEach(letter => {
+    const btn = document.createElement("button");
+    btn.textContent = letter;
+
+    btn.addEventListener("click", () => {
+      if (btn.classList.contains("used")) return;
+
+      // usa ESATTAMENTE la stessa logica della tastiera fisica
+      checkLetter(letter);
+
+      btn.classList.add("used");
+    });
+
+    mobileKeyboard.appendChild(btn);
+  });
+}
 
     // STANDARD / EXPRESS
     if(remainingVowels().length === 0){
@@ -1782,6 +1808,7 @@ window.addEventListener("beforeunload", () => {
     JSON.stringify([...usedPhrases])
   );
 });
+
 
 
 
