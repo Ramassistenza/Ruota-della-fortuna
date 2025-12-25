@@ -478,5 +478,33 @@ body{
   display:none;
 }
 
+.mobile-keyboard{
+  position:fixed;
+  bottom:10px;
+  left:50%;
+  transform:translateX(-50%);
+  display:grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap:8px;
+  width:95%;
+  max-width:520px;
+  z-index:900;
+}
+
+.mobile-keyboard button{
+  padding:14px 0;
+  border-radius:12px;
+  border:none;
+  background:#2b7cff;
+  color:white;
+  font-weight:900;
+  font-size:18px;
+}
+
+.mobile-keyboard button.used{
+  background:#444;
+  opacity:.4;
+}
+
 
 
