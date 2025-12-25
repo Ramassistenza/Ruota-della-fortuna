@@ -1746,7 +1746,34 @@ async function startNewRound(){
 
 }
 
+/* ======================================================
+   ⌨️ TASTIERA MOBILE (iPhone / iPad)
+====================================================== */
+const mobileKeyboard = document.getElementById("mobileKeyboard");
 
+if (mobileKeyboard) {
+
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+  letters.forEach(letter => {
+    const btn = document.createElement("button");
+    btn.textContent = letter;
+
+    btn.addEventListener("click", () => {
+
+      // se sto comprando una vocale
+      if (buyingVowel) {
+        handleBoughtVowel(letter);
+        return;
+      }
+
+      // altrimenti consonante normale
+      checkLetter(letter);
+    });
+
+    mobileKeyboard.appendChild(btn);
+  });
+}
 
 /* ======================================================
    AVVIO PARTITA COMPLETA (reset totali e jolly)
