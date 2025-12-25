@@ -1697,6 +1697,40 @@ spinWheelBtn?.addEventListener("click", ()=>{
   spinWheel();
 });
 
+/* ======================================================
+   ⌨️ TASTIERA MOBILE (TOGGLE MANUALE)
+====================================================== */
+const mobileKeyboard = document.getElementById("mobileKeyboard");
+const toggleKeyboardBtn = document.getElementById("toggleKeyboardBtn");
+
+if (mobileKeyboard) {
+
+  const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+
+  letters.forEach(letter => {
+    const btn = document.createElement("button");
+    btn.textContent = letter;
+
+    btn.addEventListener("click", () => {
+      if (buyingVowel) {
+        handleBoughtVowel(letter);
+      } else {
+        checkLetter(letter);
+      }
+    });
+
+    mobileKeyboard.appendChild(btn);
+  });
+}
+
+toggleKeyboardBtn?.addEventListener("click", () => {
+  mobileKeyboard.classList.toggle("visible");
+
+  toggleKeyboardBtn.textContent =
+    mobileKeyboard.classList.contains("visible")
+      ? "❌ CHIUDI TASTIERA"
+      : "⌨️ APRI TASTIERA";
+});
 
 /* ======================================================
    NUOVA MANCHE (mantiene totali + jolly posseduti + jollyAvailable)
